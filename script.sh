@@ -5,14 +5,14 @@ FILE="/var/backups/mysql/${DATABASE}.$(date +"%m-%d-%Y-%T").sql.gz"
 if [ -f "$FILE" ]; then
         echo " backup file  ${FILE} already exists !"
 else
-        mysqldump -u $USER -p$PASSWORD $DATABASE | gzip > $FILE  && find /var/backups/mysql/. -mtime +29 -exec rm {} \; || echo "Could not generate backup file ${FILE} file database ${DATABASE}"
+        mysqldump -u $USER -p$PASSWORD $DATABASE | gzip > $FILE  && find /var/backups/mysql/. -mtime +29 -exec rm {} \; || echo "Could not generate backup file ${FILE} for database ${DATABASE}"
 
         if [ -f "$FILE" ]; then
          echo "Generated new mysql backup file ${FILE} for database ${DATABASE}"
            #scp $FILE username@server_ip:/path_to_remote_directory
            #echo "password"
         else
-         echo "Could not generate backup file ${FILE} file database ${DATABASE}"
+         echo "Could not generate backup file ${FILE} for database ${DATABASE}"
         fi
 
 fi
